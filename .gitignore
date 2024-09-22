@@ -10,10 +10,6 @@ instance/config.py
 # Dependencias de Node.js
 node_modules/
 
-# Datos temporales y archivos subidos
-instance/uploads/
-instance/datos.json
-
 # Dependencias
 __pycache__/
 *.py[cod]
