@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Tendencias</title>
+    <link href="../static/css/output.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+</head>
+
+<body>
+    <header class="flex items-center justify-between border-b px-4 py-3 border-gray-200">
+        <div class="flex items-center gap-4">
+            <div class="text-orange-500">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 h-10">
+                    <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
+                </svg>
+            </div>
+            <h2 class="text-lg font-bold text-gray-900">Calidad del Aguaymanto</h2>
+        </div>
+
+        <div class="md:flex hidden gap-6">
+            <a href="/" class="text-sm font-medium text-gray-600 hover:text-orange-500">Toma de datos</a>
+            <a href="/analisis" class="text-sm font-medium text-gray-600 hover:text-orange-500">Análisis</a>
+        </div>
+    </header>
+    
+    <div class="container mx-auto">
+        <!-- Sección: Análisis de Tendencias -->
+        <h1 class="text-3xl font-bold text-center my-6">Análisis de Tendencias</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Análisis de Grados Brix</h3>
+                <canvas id="brixChart" class="w-full h-80"></canvas>
+                <p id="brixInterpretation" class="text-sm italic text-gray-600 mt-2">Interpretación: Aguardando datos...</p>
+            </div>
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Análisis de Temperatura</h3>
+                <canvas id="temperatureChart" class="w-full h-80"></canvas>
+                <p id="temperatureInterpretation" class="text-sm italic text-gray-600 mt-2">Interpretación: Aguardando datos...</p>
+            </div>
+        </div>
+
+        <!-- Sección: Detección de Outliers -->
+        <h1 class="text-3xl font-bold text-center my-6">Detección de Outliers</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Outliers en Tamaño (IQR)</h3>
+                <canvas id="sizeOutliersChart" class="w-full h-80"></canvas>
+                <p id="sizeInterpretation" class="text-sm italic text-gray-600 mt-2">Interpretación: Aguardando datos...</p>
+            </div>
+        </div>
+
+        <!-- Sección: Análisis de Variabilidad -->
+        <h1 class="text-3xl font-bold text-center my-6">Análisis de Variabilidad</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Variabilidad de Brix y Temperatura</h3>
+                <canvas id="brixTempVariabilityChart" class="w-full h-80"></canvas>
+                <p id="brixTempVariabilityInterpretation" class="text-sm italic text-gray-600 mt-2">Interpretación: Aguardando datos...</p>
+            </div>
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Distribución de Colores</h3>
+                <canvas id="colorDistributionChart" class="w-full h-80"></canvas>
+            </div>
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Distribución de Defectos Visuales</h3>
+                <canvas id="defectsChart" class="w-full h-80"></canvas>
+            </div>
+        </div>
+
+        <!-- Sección: Calidad resultante -->
+        <h1 class="text-3xl font-bold text-center my-6">Calidad Resultante</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-center">Distribución de Calidad</h3>
+                <canvas id="qualityChart" class="w-full h-80"></canvas>
+                <p id="qualityInterpretation" class="text-sm italic text-gray-600 mt-2">Interpretación: Aguardando datos...</p>
+            </div>
+        </div>
+
+        <!-- Botón para volver y para descargar el informe PDF -->
+        <div class="text-center mt-8">
+            <button onclick="window.location.href='/'" class="bg-gray-500 hover:bg-gray-600 text-white font-bold px-6 py-2 rounded-xl">
+                Volver a la página principal
+            </button>
+            <button id="download-pdf" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-xl ml-4">
+                Descargar Informe PDF
+            </button>
+        </div>
+
+<!-- Incluir la librería html2pdf.js para generar el PDF -->
+    </div>
+<!-- JavaScript para cargar los gráficos -->
+    <!-- JavaScript para cargar los gráficos -->
+    <script src="../static/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const element = document.querySelector('.container'); // Selecciona el contenedor principal                // Configuración de las opciones del PDF
+            const opt = {
+                margin: 0.5,
+                filename: 'informe_aguaymanto.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };             // Generar el PDF
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+    </body>
+</html>

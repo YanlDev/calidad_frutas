@@ -1,0 +1,33 @@
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# Archivos de configuración del entorno
+*.env
+instance/config.py
+
+# Dependencias de Node.js
+node_modules/
+
+# Datos temporales y archivos subidos
+instance/uploads/
+instance/datos.json
+
+# Dependencias
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Configuración de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
