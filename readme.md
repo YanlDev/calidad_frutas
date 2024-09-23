@@ -55,3 +55,30 @@ Este proyecto tiene como finalidad evaluar la calidad de frutas (aguaymanto) a t
 ## Configurar Variables de Entorno
 ``OPENAI_API_KEY=tu_clave_de_api_de_openai``
 ``FLASK_ENV=development``
+
+
+
+Introducción
+  Descripción General
+  Público Objetivo
+  Requisitos del Sistema
+Guía de Instalación
+  Requisitos Previos
+  Pasos para la Instalación
+  Resolución de Problemas de Instalación
+Descripción de la Interfaz de Usuario
+  Pantalla Principal
+  Explicación de Íconos y Funciones
+  Ejemplos Visuales
+Guía de Uso
+  Flujo de Trabajo Básico
+  Funciones Principales
+  Ejemplos de Uso
+Resolución de Problemas Comunes
+  Errores Comunes y Soluciones
+  FAQ (Preguntas Frecuentes)
+
+Soporte Técnico y Contacto
+
+Licencia
+
